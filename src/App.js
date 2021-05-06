@@ -15,7 +15,7 @@ export default class Demo extends Component {
     return (
       <ConfirmProvider>
         <Helmet>
-          <title>{ 'E-Lamove' }</title>
+          <title>{ 'E-Lamove | Admin' }</title>
         </Helmet>
         <ToastContainer />
         <App config={config} />
