@@ -8,7 +8,7 @@ import ApiCore from './core'
 // a request
 const staffLogin = new ApiCore({
   post: true,
-  url: 'clients/login'
+  url: 'staffs/login'
 });
 
 

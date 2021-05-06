@@ -15,7 +15,6 @@ import 'react-toastify/dist/ReactToastify.css';
         newestOnTop={false}
         closeOnClick
         rtl={false}
-        pauseOnFocusLoss
         draggable
         pauseOnHover
         />
@@ -29,7 +28,7 @@ import 'react-toastify/dist/ReactToastify.css';
     toast[type](message, {
       position: 'top-right',
       autoClose: 5000,
-      hideProgressBar: false,
+      hideProgressBar: true,
       closeOnClick: true,
       progress: undefined,
       draggable: false

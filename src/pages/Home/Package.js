@@ -36,12 +36,9 @@ const Package = (props) => {
           <Typography color="textSecondary" align={'center'} component="p">
             {packageInfo.size}
           </Typography>
-          <Typography color="textSecondary" align={'center'} component="p">
-            {packageInfo.rate}
-          </Typography>
-          <Typography color="textSecondary" align={'center'} component="p">
-            Rate
-          </Typography>
+          {/* <Typography color="textSecondary" align={'center'} component="p">
+            Starts at {packageInfo.rate}
+          </Typography> */}
           
         </CardContent>
       </CardActionArea>

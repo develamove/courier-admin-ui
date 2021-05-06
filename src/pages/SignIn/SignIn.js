@@ -11,7 +11,7 @@ import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
-import { clientLogin } from '../../services/api/clients'
+import { staffLogin } from '../../services/api/staff'
 import _ from 'lodash'
 
 const useStyles = makeStyles((theme) => ({
@@ -65,7 +65,8 @@ const SignIn = () => {
 
   async function handleSubmit(event) {
     event.preventDefault()
-    let response = await clientLogin.post({
+    console.log('staff')
+    let response = await staffLogin.post({
       username: username,
       password: password
     })
@@ -77,7 +78,6 @@ const SignIn = () => {
       authenticate({
         displayName: username,
         email: 'user',
-        client_id: response.data.client_id,
         token: response.data.token
       })
     }
@@ -91,11 +91,9 @@ const SignIn = () => {
     let _route = '/home'
 
     if (_location.state && _location.state.from) {
-      _route = _location.state.from.pathname
-      history.push(_route)
-    } else {
-      history.push(_route)
+      _route = _location.state.from.pathname 
     }
+    history.push(_route)
   }
 
   return (

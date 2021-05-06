@@ -41,37 +41,37 @@ const packageTypes = [
   {
     name: 'Small',
     item_type: 'S',
-    item_code: 's',
+    item_code: 'S',
     rate: 100,
-    weight: 'Max weight: 3 kg',
+    weight: '',
     size: '23.7cm x 39.8cm',
     description: ''
   },
   {
     name: 'Medium',
     item_type: 'M',
-    item_code: 'm',
+    item_code: 'M',
     rate: 150,
-    weight: 'Max weight: 3 kg',
+    weight: '',
     size: '28.8cm x 44.7cm',
     description: ''
   },
   {
     name: 'Large',
     item_type: 'L',
-    item_code: 'l',
+    item_code: 'L',
     rate: 180,
-    weight: 'Max weight: 3 kg',
-    size: '30cm x 50.5cm',
+    weight: '',
+    size: '35.5cm x 50cm',
     description: ''
   },
   {
     name: 'Box',
     item_type: 'B',
-    item_code: 'b',
+    item_code: 'B',
     rate: 220,
-    weight: 'Max weight: 3 kg',
-    size: '30cm x 50.5cm',
+    weight: '',
+    size: '18 in x 12 in x 9 in',
     description: ''
   },
 ]
@@ -79,10 +79,11 @@ const packageTypes = [
 const PackageDialog = (props) => {
   const { btnText, isOpen, getPackageInfo, defaults } = props
   const classes = useStyles();
-  const [packageName, setPackageName] = useState(defaults.item_name && '')
-  const [selectedPackage, setSelectedPackage] = useState(['s', 'm', 'l', 'b'].indexOf(defaults.package.item_code) && 0)
+  const [packageName, setPackageName] = useState(defaults.item_description !== undefined ? defaults.item_description : '')
+  const [packageValue, setPackageValue] = useState(defaults.item_value !== undefined ? defaults.item_value : 0)
+  const [selectedPackage, setSelectedPackage] = useState(defaults.package.item_code !== undefined ? ['S', 'M', 'L', 'B'].indexOf(defaults.package.item_code) : 0)
   const [errors, setErrors] = useState({})
-  const [isCOD, setIsCOD] = useState(defaults.isCOD && 'F')
+  const [paymentMethod, setPaymentMethod] = useState(defaults.payment_method !== undefined ? defaults.payment_method : 'regular')
   const [isDialogOpen, setDialogOpen] = useState(isOpen || false)
 
   const handleDialogState = (isOpen) => {
@@ -118,11 +119,12 @@ const PackageDialog = (props) => {
       handleDialogClose()
       getPackageInfo({
         item_name: packageName,
-        is_cod: isCOD,
+        item_description: packageName,
+        item_value: packageValue,
+        payment_method: paymentMethod,
         package: packageTypes[selectedPackage]
       })
     }
-    
   }
 
   return (
@@ -175,15 +177,31 @@ const PackageDialog = (props) => {
           <FormControlLabel
             control={
               <Checkbox
+                checked={paymentMethod === 'cod'}
                 onChange={() => {
-                  let value = isCOD === 'T' ? 'F' : 'T'
-                  setIsCOD(value)
+                  let value = paymentMethod === 'regular' ? 'cod' : 'regular'
+                  setPaymentMethod(value)
                 }}
-                name="checkedF"
+                name="paymentMethod"
               />
           }
           label="Cash on Delivery"
         />
+        { paymentMethod === 'cod' && 
+          <TextField
+            margin="dense"
+            label={'Package Value'}
+            type="text"
+            name={"packageValue"}
+            value={packageValue}
+            onChange={(event) => {
+              setPackageValue(event.target.value)
+            }}
+            fullWidth
+            error={errors.hasOwnProperty('packageValue') === true}
+            helperText={errors.hasOwnProperty('packageValue') ? errors['packageValue'][0] : '' }
+          />
+        }
 
         </DialogContent>
         <DialogActions>
