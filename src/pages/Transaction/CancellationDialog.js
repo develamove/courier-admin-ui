@@ -10,7 +10,7 @@ import _ from 'lodash';
 import axios from 'axios'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { ToastEmitter } from '../../components/Toast';
-
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -21,9 +21,39 @@ import { ToastEmitter } from '../../components/Toast';
 //   },
 // }));
 
+const REASONS = [
+  {
+    name: '',
+    value: ''
+  },
+  {
+    name: 'reason1',
+    value: 'reason1'
+  },
+  {
+    name: 'reason2',
+    value: 'reason2'
+  },
+  {
+    name: 'reason3',
+    value: 'reason3'
+  },
+  {
+    name: 'reason4',
+    value: 'reason4'
+  },
+  {
+    name: 'reason5',
+    value: 'reason5'
+  }
+]
+
 const CancellationDialog = (props) => {
   const auth = useAuth()
-  const [cancellationComments, setCancellationComments] = useState('')
+  const [reason, setReason] = useState({
+    name: 'reason1',
+    value: 'reason1'
+  })
 
   // const classes = useStyles();
   const { isOpen, transaction, handleClose } = props
@@ -43,9 +73,9 @@ const CancellationDialog = (props) => {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${auth.auth.token}`,
     }
-
+    
     axios.put(process.env.REACT_APP_WEB_API + '/deliveries/' + transaction['id'].toString(), {
-      cancellation_reason: cancellationComments,
+      cancellation_reason: reason.value,
       for_cancellation: 'T'
     }, {
       headers: headers
@@ -76,21 +106,22 @@ const CancellationDialog = (props) => {
         <DialogTitle>Transaction</DialogTitle>
 
         <DialogContent>
-          <TextField
-            autoFocus
-            margin="dense"
-            label={'Cancellation Reason'}
-            type="text"
-            name={"cancellationComments"}
-            value={cancellationComments}
-            onChange={(event) => {
-              setCancellationComments(event.target.value)
-            }}
-            rows={5}
-            fullWidth
-            multiline
-          />
-          
+        <Autocomplete
+             options={REASONS}
+             getOptionLabel={(option) => option.name}
+             getOptionSelected={(option, value) => option.name === value.name}
+             clearOnEscape
+             name={'reasons'}
+             value={reason}
+             onChange={(event, newValue) => {
+              setReason(newValue)
+             }}
+            renderInput={(params) => <TextField 
+                  {...params} 
+                  label="Canncellation Reason"
+                  margin="normal"
+                />}
+           />    
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDialogClose} color="primary">
