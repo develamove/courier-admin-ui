@@ -335,7 +335,7 @@ const AddressDialog = (props) => {
              }}
             renderInput={(params) => <TextField 
                   {...params} 
-                  label="District" 
+                  label="Barangay" 
                   margin="normal" 
                   error={errors.hasOwnProperty('district_name') === true}
                   helperText={errors.hasOwnProperty('district_name') ? errors['district_name'][0] : '' }

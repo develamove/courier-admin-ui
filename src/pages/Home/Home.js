@@ -164,7 +164,7 @@ const HomePage = () => {
               }}
             />
             <p>
-              Sender: {delivery.sender.full_name}, {delivery.sender.cellphone_no}, {delivery.sender.province_name}, {delivery.sender.city_name}, {delivery.sender.district_name}, {delivery.sender.district.postal_code}
+              Sender: {delivery.sender.full_name}, {delivery.sender.cellphone_no !== '' ? '+63' + delivery.sender.cellphone_no : ''}, {delivery.sender.street}, {delivery.sender.landmarks}, {delivery.sender.province_name}, {delivery.sender.city_name}, {delivery.sender.district_name}, {delivery.sender.district.postal_code}
             </p>
           </Fragment>
         );
@@ -182,7 +182,7 @@ const HomePage = () => {
               }}
             />
             <p>
-            Recipient: {delivery.recipient.province_name}, {delivery.recipient.city_name}, {delivery.recipient.district_name}, {delivery.recipient.district.postal_code}
+            Recipient: {delivery.recipient.full_name}, {delivery.recipient.cellphone_no !== '' ? '+63' + delivery.recipient.cellphone_no : ''}, {delivery.recipient.street}, {delivery.recipient.landmarks}, {delivery.recipient.province_name}, {delivery.recipient.city_name}, {delivery.recipient.district_name}, {delivery.recipient.district.postal_code}
             </p>
           </Fragment>
         );
@@ -200,14 +200,14 @@ const HomePage = () => {
           <Fragment>
             <h1>Summary</h1>
             <ul>
-              <li>Sender: {delivery.sender.full_name}, {delivery.sender.cellphone_no}, {delivery.sender.street}, {delivery.sender.landmarks}, {delivery.sender.province_name}, {delivery.sender.city_name}, {delivery.sender.district_name}, {delivery.sender.district.postal_code}</li>
-              <li>Recipient: {delivery.recipient.full_name}, {delivery.recipient.cellphone_no}, {delivery.recipient.street}, {delivery.recipient.landmarks}, {delivery.recipient.province_name}, {delivery.recipient.city_name}, {delivery.recipient.district_name}, {delivery.recipient.district.postal_code}</li>
+              <li>Sender: {delivery.sender.full_name},{delivery.sender.cellphone_no !== '' ? '+63' + delivery.sender.cellphone_no : ''}, {delivery.sender.street}, {delivery.sender.landmarks}, {delivery.sender.province_name}, {delivery.sender.city_name}, {delivery.sender.district_name}, {delivery.sender.district.postal_code}</li>
+              <li>Recipient: {delivery.recipient.full_name}, {delivery.recipient.cellphone_no !== '' ? '+63' + delivery.recipient.cellphone_no : ''}, {delivery.recipient.street}, {delivery.recipient.landmarks}, {delivery.recipient.province_name}, {delivery.recipient.city_name}, {delivery.recipient.district_name}, {delivery.recipient.district.postal_code}</li>
               <li>Package Description: {delivery.package.item_name}</li>
               <li>Package Value: {delivery.package.item_value}</li>
               <li>Shipping Fee: {computeShippingRate()}</li>
               <li>Insurance Fee: 0</li>
               <li>Payment Method: {delivery.package.payment_method === 'regular' ? 'Regular Transaction' : 'Cash on Delivery' }</li>
-              <li>Service Fee payor: {delivery.service_fees_payor}</li>
+              <li>Shipping Fee payor: {_.capitalize(delivery.service_fees_payor)}</li>
             </ul>
             <FormControl component="fieldset">
               <FormLabel component="legend">Service Fee will be charge by:</FormLabel>
