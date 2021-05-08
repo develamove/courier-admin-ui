@@ -118,17 +118,17 @@ const Transaction = () => {
     return status.charAt(0).toUpperCase() + status.slice(1);
   }
 
-  const cancelTransaction = (transaction) => {
-    // Cancellation is only available in for_pickup status
-    if (transaction.status === 'cancelled') {
-      ToastEmitter('info', 'Transaction is already cancelled!')
-    } else if (transaction.status === 'for_pickup') {
-      setSelectedTransaction(transaction)
-      setCancellationDialogOpen(true)
-    } else {
-      ToastEmitter('info', 'Can\'t cancel the transaction, transaction is already in ' + transaction.status)
-    }
-  }
+  // const cancelTransaction = (transaction) => {
+  //   // Cancellation is only available in for_pickup status
+  //   if (transaction.status === 'cancelled') {
+  //     ToastEmitter('info', 'Transaction is already cancelled!')
+  //   } else if (transaction.status === 'for_pickup') {
+  //     setSelectedTransaction(transaction)
+  //     setCancellationDialogOpen(true)
+  //   } else {
+  //     ToastEmitter('info', 'Can\'t cancel the transaction, transaction is already in ' + transaction.status)
+  //   }
+  // }
 
   const showInfoDialog = (transaction) => {
     setSelectedTransaction(transaction)
@@ -220,11 +220,6 @@ const Transaction = () => {
               icon: tableIcons.CreateIcon,
               tooltip: 'Create Event',
               onClick: (event, rowData) => showEventDialog(rowData)
-            },
-            {
-              icon: tableIcons.CancelScheduleSendIcon,
-              tooltip: 'Cancel Transaction',
-              onClick: (event, rowData) => cancelTransaction(rowData)
             },
             {
               icon: tableIcons.GetAppIcon,

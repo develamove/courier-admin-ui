@@ -77,7 +77,6 @@ const transanctionInfo = {
 const InfoDialog = (props) => {
   const auth = useAuth()
   const { isOpen, transaction, handleClose } = props
-  console.log(transaction)
   const [transactionInfo] = useState(transaction !== undefined ? transaction : transanctionInfo)
   const [isDialogOpen, setDialogOpen] = useState(isOpen !== undefined ? isOpen : false)
   const [receiptID, setReceiptID] = useState(transaction.receipt_id !== undefined ? transaction.receipt_id : '')
@@ -103,6 +102,11 @@ const InfoDialog = (props) => {
   }
 
   const saveInfo = () => {
+    if (_.isEmpty(receiptID) === true) {
+      handleDialogClose()
+      return
+    }
+
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${auth.auth.token}`,
