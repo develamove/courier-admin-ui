@@ -29,47 +29,63 @@ import { ToastEmitter } from '../../components/Toast';
 
 const CANCELLED_REASONS = [
   {
-    name: 'Cancelled reason 1',
-    value: 'Cancelled reason 1',
+    name: 'Item/s not ready',
+    value: 'Item/s not ready',
   },
   {
-    name: 'Cancelled reason 2',
-    value: 'Cancelled reason 2',
+    name: 'Item/s ouor of stock.',
+    value: 'Item/s ouor of stock.',
   },
   {
-    name: 'Cancelled reason 3',
-    value: 'Cancelled reason 3',
+    name: 'Out of town or not around.',
+    value: 'Out of town or not around.',
   },
   {
-    name: 'Cancelled reason 4',
-    value: 'Cancelled reason 4',
+    name: 'Enterned wrong pick-up address.',
+    value: 'Enterned wrong pick-up address.',
   },
   {
-    name: 'Cancelled reason 5',
-    value: 'Cancelled reason 5',
+    name: 'Buyer requested to cancel transaction.',
+    value: 'Buyer requested to cancel transaction.',
+  },
+  {
+    name: 'Buyer provided incorrect details.',
+    value: 'Buyer provided incorrect details.',
+  },
+  {
+    name: 'Incorrect Casg-on-Delivery (COD) amount.',
+    value: 'Incorrect Casg-on-Delivery (COD) amount.',
   }
 ]
 
 const FAILED_REASONS = [
   {
-    name: 'Failed reason 1',
-    value: 'Failed reason 1',
+    name: 'Item/s not ready',
+    value: 'Item/s not ready',
   },
   {
-    name: 'Failed reason 2',
-    value: 'Failed reason 2',
+    name: 'Item/s ouor of stock.',
+    value: 'Item/s ouor of stock.',
   },
   {
-    name: 'Failed reason 3',
-    value: 'Failed reason 3',
+    name: 'Out of town or not around.',
+    value: 'Out of town or not around.',
   },
   {
-    name: 'Failed reason 4',
-    value: 'Failed reason 4',
+    name: 'Enterned wrong pick-up address.',
+    value: 'Enterned wrong pick-up address.',
   },
   {
-    name: 'Failed reason 5',
-    value: 'Failed reason 5',
+    name: 'Buyer requested to cancel transaction.',
+    value: 'Buyer requested to cancel transaction.',
+  },
+  {
+    name: 'Buyer provided incorrect details.',
+    value: 'Buyer provided incorrect details.',
+  },
+  {
+    name: 'Incorrect Casg-on-Delivery (COD) amount.',
+    value: 'Incorrect Casg-on-Delivery (COD) amount.',
   }
 ]
 
@@ -181,7 +197,8 @@ const EventDialog = (props) => {
   }
 
   const formatDate = date => {
-    return moment(date).format('MMMM D, YYYY HH:MM');
+    console.log(date)
+    return moment(date).format('MMMM DD, YYYY H:mm:ss');
   }
 
   return (
