@@ -53,8 +53,8 @@ const CANCELLED_REASONS = [
     value: 'Buyer provided incorrect details.',
   },
   {
-    name: 'Incorrect Casg-on-Delivery (COD) amount.',
-    value: 'Incorrect Casg-on-Delivery (COD) amount.',
+    name: 'Incorrect Cash-on-Delivery (COD) amount.',
+    value: 'Incorrect Cash-on-Delivery (COD) amount.',
   }
 ]
 
@@ -84,8 +84,8 @@ const FAILED_REASONS = [
     value: 'Buyer provided incorrect details.',
   },
   {
-    name: 'Incorrect Casg-on-Delivery (COD) amount.',
-    value: 'Incorrect Casg-on-Delivery (COD) amount.',
+    name: 'Incorrect Cash-on-Delivery (COD) amount.',
+    value: 'Incorrect Cash-on-Delivery (COD) amount.',
   }
 ]
 
