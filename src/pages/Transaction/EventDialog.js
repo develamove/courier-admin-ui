@@ -33,16 +33,16 @@ const CANCELLED_REASONS = [
     value: 'Item/s not ready',
   },
   {
-    name: 'Item/s ouor of stock.',
-    value: 'Item/s ouor of stock.',
+    name: 'Item/s out of stock.',
+    value: 'Item/s out of stock.',
   },
   {
     name: 'Out of town or not around.',
     value: 'Out of town or not around.',
   },
   {
-    name: 'Enterned wrong pick-up address.',
-    value: 'Enterned wrong pick-up address.',
+    name: 'Entered wrong pick-up address.',
+    value: 'Entered wrong pick-up address.',
   },
   {
     name: 'Buyer requested to cancel transaction.',
@@ -64,16 +64,16 @@ const FAILED_REASONS = [
     value: 'Item/s not ready',
   },
   {
-    name: 'Item/s ouor of stock.',
-    value: 'Item/s ouor of stock.',
+    name: 'Item/s out of stock.',
+    value: 'Item/s out of stock.',
   },
   {
     name: 'Out of town or not around.',
     value: 'Out of town or not around.',
   },
   {
-    name: 'Enterned wrong pick-up address.',
-    value: 'Enterned wrong pick-up address.',
+    name: 'Entered wrong pick-up address.',
+    value: 'Entered wrong pick-up address.',
   },
   {
     name: 'Buyer requested to cancel transaction.',
@@ -88,7 +88,6 @@ const FAILED_REASONS = [
     value: 'Incorrect Cash-on-Delivery (COD) amount.',
   }
 ]
-
 
 const EVENTS = [
   {
@@ -119,7 +118,7 @@ const EVENTS = [
 
 const EventDialog = (props) => {
   const auth = useAuth()
-  const [remarks, setRemarks] = useState('Cancelled Reason 1')
+  const [remarks, setRemarks] = useState('Item/s not ready')
   const [events, setEvents] = useState([])
   const [selectedEvent, setSelectedEvent] = useState('0')
   const { isOpen, transaction, handleClose } = props
