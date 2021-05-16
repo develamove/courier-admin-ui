@@ -60,8 +60,8 @@ const CANCELLED_REASONS = [
 
 const FAILED_REASONS = [
   {
-    name: 'Item/s not ready',
-    value: 'Item/s not ready',
+    name: 'Item/s not ready.',
+    value: 'Item/s not ready.',
   },
   {
     name: 'Item/s out of stock.',

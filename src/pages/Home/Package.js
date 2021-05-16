@@ -8,9 +8,11 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { CardHeader } from '@material-ui/core';
 // import { Validator } from '../../utils/customValidator';
+import { SHIPPING_FEES } from '../../utils/data';
+
 
 const Package = (props) => {
-  const { packageInfo, isSelected } = props
+  const { packageInfo, isSelected, area } = props
 
   return (
     <Fragment>
@@ -27,7 +29,7 @@ const Package = (props) => {
           action={(isSelected === true) ? <CheckCircleRoundedIcon /> : null}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h6" component="h5">
           {packageInfo.name}
           </Typography>
           <Typography color="textSecondary" align={'center'} component="p">
@@ -36,9 +38,9 @@ const Package = (props) => {
           <Typography color="textSecondary" align={'center'} component="p">
             {packageInfo.size}
           </Typography>
-          {/* <Typography color="textSecondary" align={'center'} component="p">
-            Starts at {packageInfo.rate}
-          </Typography> */}
+          <Typography color="textSecondary" align={'center'} component="p">
+            Fee {SHIPPING_FEES[packageInfo.item_type][area]['fee']}
+          </Typography>
           
         </CardContent>
       </CardActionArea>
@@ -57,6 +59,7 @@ Package.defaultProps = {
 Package.propTypes = {
   packageInfo: PropTypes.object,
   isSelected: PropTypes.bool,
+  area: PropTypes.string
 }
 
 export default Package;

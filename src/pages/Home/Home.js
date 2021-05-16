@@ -191,6 +191,7 @@ const HomePage = () => {
           <Fragment>
             <PackageDialog
               defaults={delivery.package}
+              recipient={delivery.recipient}
               getPackageInfo={handlePackageInfo}
             />
           </Fragment>

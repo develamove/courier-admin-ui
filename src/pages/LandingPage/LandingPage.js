@@ -1,19 +1,20 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Helmet } from 'react-helmet'
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Grid from '@material-ui/core/Grid';
-import _ from 'lodash';
-import axios from 'axios';
-import { ToastEmitter } from '../../components/Toast';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import React, { useState } from 'react'
 import SearchIcon from "@material-ui/icons/Search";
-
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import Toolbar from '@material-ui/core/Toolbar';
+import _ from 'lodash';
+import axios from 'axios';
+import { Helmet } from 'react-helmet'
 import { makeStyles } from '@material-ui/core/styles';
-
+import { useHistory } from "react-router-dom";
+import { ToastEmitter } from '../../components/Toast';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,7 +31,21 @@ const useStyles = makeStyles((theme) => ({
   },
   logoSearchBar: {
    
-  }
+  },
+  gridContainer: {
+    [theme.breakpoints.down('sm')]: {
+      margin: 0,
+      '& > .MuiGrid-item': {
+        padding: 0,
+      },
+    },
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
 }));
 
 const LandingPage = () => {
@@ -39,6 +54,7 @@ const LandingPage = () => {
   const [trackingID, setTrackingID] = useState('')
   const [isChecked, setIsChecked] = useState('F')
   const [errors, setErrors] = useState({})
+  const history = useHistory();
   
   const handleSearchTransaction = () => {
     if (_.isEmpty(trackingID) === true) {
@@ -53,7 +69,7 @@ const LandingPage = () => {
 
     if (isChecked === 'T') {
       requestParams = {
-        'receipt_id': trackingID
+        'filter_key': 'receipt_id'
       }
     }
     axios.get(process.env.REACT_APP_WEB_API + '/deliveries/' + trackingID , {
@@ -89,15 +105,29 @@ const LandingPage = () => {
       <Helmet>
         <title>{ 'E-lamove | Tracking Page' }</title>
       </Helmet>
-
+      <AppBar position="static">
+        <Toolbar>
+          <Button color="inherit"
+            onClick={() => { history.push('/home'); }}
+          >Create new Booking</Button>
+        </Toolbar>
+      </AppBar>
     <Grid container className={classes.root} direction={'column'} spacing={2} justify="center">
-      <Grid item xs={12}>
+      <Grid 
+        item 
+        xs={12} 
+        classes={{
+          root: classes.gridContainer,
+        }}
+      >
       </Grid>
-      <Grid item xs={12}>
-      <div>
-        <Link to="/home">Create new Booking</Link>
-      </div>
-      <h1>WHERE'S MY DELIVERY?</h1>  
+      <Grid  
+        item
+        xs={12} 
+        classes={{
+          root: classes.gridContainer,
+        }}>
+      <h2>WHERE'S MY DELIVERY?</h2>  
         <OutlinedInput
           autoFocus
           error={errors.hasOwnProperty('tracking_id') === true}

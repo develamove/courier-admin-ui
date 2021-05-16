@@ -77,7 +77,7 @@ const packageTypes = [
 ]
 
 const PackageDialog = (props) => {
-  const { btnText, isOpen, getPackageInfo, defaults } = props
+  const { btnText, isOpen, getPackageInfo, defaults, recipient } = props
   const classes = useStyles();
   const [packageName, setPackageName] = useState(defaults.item_description !== undefined ? defaults.item_description : '')
   const [packageValue, setPackageValue] = useState(defaults.item_value !== undefined ? defaults.item_value : 0)
@@ -167,6 +167,7 @@ const PackageDialog = (props) => {
                 }}
               >
                 <Package
+                  area={recipient.province.area}
                   packageInfo={packageType}
                   isSelected={selectedPackage === index}
                 />
