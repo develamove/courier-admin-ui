@@ -1,5 +1,171 @@
 import _ from 'lodash';
 
+export const citiesWithPickUp = {
+	17: [
+				{
+					"id": 280,
+					"name": "",
+				},
+				{
+					"created_timestamp": "2021-04-21 05:01:05",
+					"id": 280,
+					"is_pickup_available": "T",
+					"name": "Balagtas",
+					"province_id": 17
+				},
+				{
+					"created_timestamp": "2021-04-21 05:01:05",
+					"id": 291,
+					"is_pickup_available": "T",
+					"name": "Meycauayan City",
+					"province_id": 17
+				},
+				{
+					"created_timestamp": "2021-04-21 05:01:05",
+					"id": 290,
+					"is_pickup_available": "T",
+					"name": "Marilao",
+					"province_id": 17
+				},
+				{
+					"created_timestamp": "2021-04-21 05:01:05",
+					"id": 282,
+					"is_pickup_available": "T",
+					"name": "Bocaue",
+					"province_id": 17
+				},
+				{
+					"created_timestamp": "2021-04-21 05:01:05",
+					"id": 283,
+					"is_pickup_available": "F",
+					"name": "Bulacan",
+					"province_id": 17
+				},
+				{
+					"created_timestamp": "2021-04-21 05:01:05",
+					"id": 299,
+					"is_pickup_available": "T",
+					"name": "San Jose Del Monte City",
+					"province_id": 17
+				},
+				{
+					"created_timestamp": "2021-04-21 05:01:05",
+					"id": 302,
+					"is_pickup_available": "T",
+					"name": "Santa Maria",
+					"province_id": 17
+				}
+		],
+	24: [
+				{
+					"id": 416,
+					"name": "",
+				},
+				{
+					"created_timestamp": "2021-04-21 05:01:05",
+					"id": 416,
+					"is_pickup_available": "T",
+					"name": "Bacoor City",
+					"province_id": 24
+				},
+				{
+					"created_timestamp": "2021-04-21 05:01:05",
+					"id": 418,
+					"is_pickup_available": "T",
+					"name": "Cavite City",
+					"province_id": 24
+				},
+				{
+					"created_timestamp": "2021-04-21 05:01:05",
+					"id": 419,
+					"is_pickup_available": "T",
+					"name": "Dasmarinas City",
+					"province_id": 24
+				},
+				{
+					"created_timestamp": "2021-04-21 05:01:05",
+					"id": 420,
+					"is_pickup_available": "F",
+					"name": "Gen. Mariano Alvarez",
+					"province_id": 24
+				},
+				{
+					"created_timestamp": "2021-04-21 05:01:05",
+					"id": 422,
+					"is_pickup_available": "T",
+					"name": "General Trias City",
+					"province_id": 24
+				},
+				{
+					"created_timestamp": "2021-04-21 05:01:05",
+					"id": 423,
+					"is_pickup_available": "T",
+					"name": "Imus City",
+					"province_id": 24
+				},
+				{
+					"created_timestamp": "2021-04-21 05:01:05",
+					"id": 434,
+					"is_pickup_available": "T",
+					"name": "Tanza",
+					"province_id": 24
+				},
+		],
+	65: [
+				{
+					"id": 1330,
+					"name": "",
+				},
+				{
+				"created_timestamp": "2021-04-21 05:01:05",
+				"id": 1330,
+				"is_pickup_available": "T",
+				"name": "Taytay",
+				"province_id": 65
+				},
+				{
+				"created_timestamp": "2021-04-21 05:01:05",
+				"id": 1328,
+				"is_pickup_available": "T",
+				"name": "San Mateo",
+				"province_id": 65
+				},
+				{
+				"created_timestamp": "2021-04-21 05:01:05",
+				"id": 1322,
+				"is_pickup_available": "T",
+				"name": "Cainta",
+				"province_id": 65
+				},
+				{
+				"created_timestamp": "2021-04-21 05:01:05",
+				"id": 1319,
+				"is_pickup_available": "T",
+				"name": "Antipolo City",
+				"province_id": 65
+				},
+		],
+	42: [
+			{
+				"id": 773,
+				"name": "",
+			},
+			{
+				"created_timestamp": "2021-04-21 05:01:05",
+				"id": 773,
+				"is_pickup_available": "T",
+				"name": "San Pedro City",
+				"province_id": 42
+			},
+			{
+				"created_timestamp": "2021-04-21 05:01:05",
+				"id": 776,
+				"is_pickup_available": "T",
+				"name": "Santa Rosa City",
+				"province_id": 42
+			},
+	]
+}
 
 export const provincesWithoutPickUpLocation = [
 	{
@@ -763,4 +929,3 @@ export const RATES = {
     }
   }
 }
-
