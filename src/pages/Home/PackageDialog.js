@@ -15,6 +15,8 @@ import _ from 'lodash';
 import { Validator } from '../../utils/customValidator';
 import { makeStyles } from '@material-ui/core/styles';
 import { GridListTile } from '@material-ui/core';
+import { greatManilaCityIDs } from '../../utils/data';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,7 +79,9 @@ const packageTypes = [
 ]
 
 const PackageDialog = (props) => {
+  
   const { btnText, isOpen, getPackageInfo, defaults, recipient } = props
+ 
   const classes = useStyles();
   const [packageName, setPackageName] = useState(defaults.item_description !== undefined ? defaults.item_description : '')
   const [packageValue, setPackageValue] = useState(defaults.item_value !== undefined ? defaults.item_value : 0)
@@ -127,6 +131,14 @@ const PackageDialog = (props) => {
     }
   }
 
+  const getRecipientArea = () => {
+    if (recipient.province.area === 'greater_manila' && !_.includes(greatManilaCityIDs, recipient.city.id)) {
+      return 'luzon'
+    }
+
+    return recipient.province.area
+  }
+
   return (
     <Fragment>
       <Button 
@@ -167,7 +179,7 @@ const PackageDialog = (props) => {
                 }}
               >
                 <Package
-                  area={recipient.province.area}
+                  area={getRecipientArea()}
                   packageInfo={packageType}
                   isSelected={selectedPackage === index}
                 />

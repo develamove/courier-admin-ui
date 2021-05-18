@@ -1,5 +1,9 @@
 import _ from 'lodash';
 
+export const greatManilaCityIDs = [
+	280, 282, 283, 290, 291, 299, 302, 416, 418, 419, 420, 422, 423, 434, 773, 776, 1319, 1322, 1328, 1130,
+]
+
 export const citiesWithPickUp = {
 	17: [
 				{
@@ -750,7 +754,7 @@ export const SHIPPING_FEES = {
           'fee': 100
       },
       'greater_manila': {
-          'fee': 120
+          'fee': 150
       },
       'luzon': {
           'fee': 190
@@ -784,7 +788,7 @@ export const SHIPPING_FEES = {
           'fee': 180
       },
       'greater_manila': {
-          'fee': 200
+          'fee': 210
       },
       'luzon': {
           'fee': 280
@@ -801,7 +805,7 @@ export const SHIPPING_FEES = {
           'fee': 220
       },
       'greater_manila': {
-          'fee': 250
+          'fee': 300
       },
       'luzon': {
           'fee': 470
