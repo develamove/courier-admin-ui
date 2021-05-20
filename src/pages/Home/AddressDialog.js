@@ -6,9 +6,11 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import FormControl from '@material-ui/core/FormControl';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import InputLabel from '@material-ui/core/InputLabel';
 import PropTypes from 'prop-types';
+import NativeSelect from '@material-ui/core/NativeSelect';
 import _ from 'lodash';
 import { Validator } from '../../utils/customValidator';
 import { locationsAPI } from '../../services/api/locations';
@@ -21,6 +23,9 @@ import { provincesWithoutPickUpLocation, provincesWithPickUpLocation, citiesWith
 const defaultInfo = {
   street: '',
   province: {},
+  province_index: 0,
+  city_index: 0,
+  district_index: 0,
   city: {},
   district: {},
   province_name: '',
@@ -31,17 +36,14 @@ const defaultInfo = {
   cellphone_no: ''
 }
 
-const defaultAutoCompleteOption = {
-  id: 0,
-  name: ''
-}
-
 const defaultProvincesProps = {
   sender: {
+    provinces: [{id: 0, name: 'Select Province'}, ...provincesWithPickUpLocation],
     options: [{id: 0, name: ''}, ...provincesWithPickUpLocation],
     getOptionLabel: (option) => option.name,
   },
   recipient: {
+    provinces: [{id: 0, name: 'Select Province'}, ...provincesWithoutPickUpLocation],
     options: [{id: 0, name: ''}, ...provincesWithoutPickUpLocation],
     getOptionLabel: (option) => option.name,
   }
@@ -55,11 +57,11 @@ const AddressDialog = (props) => {
   const [errors, setErrors] = useState({})
   const [cities, setCities] = useState(cachedLocations.cities || {
     cached: {},
-    selected: [{id: 0, name: ''}],
+    selected: [],
   })
   const [districts, setDistricts] = useState(cachedLocations.districts || {
     cached: {},
-    selected: [{id: 0, name: ''}],
+    selected: [],
   })
 
   const handleInfoChange = (event) => {
@@ -131,7 +133,10 @@ const AddressDialog = (props) => {
     })
 
     if (_.isEmpty(response.errors) === true) {
-      let citiesOptions = [defaultAutoCompleteOption]
+      let citiesOptions = [{
+        id: 0,
+        name: 'Select City'
+      }]
       citiesCopy.cached[cityKey] = citiesOptions.concat(response.data.cities)
       citiesCopy.selected = citiesOptions.concat(response.data.cities)
       setCities(citiesCopy)
@@ -157,7 +162,10 @@ const AddressDialog = (props) => {
     })
 
     if (_.isEmpty(response.errors) === true) {
-      let districtOptions = [defaultAutoCompleteOption]
+      let districtOptions = [{
+        id: 0,
+        name: 'Select Barangay'
+      }]
       districtsCopy.cached[districtKey] = districtOptions.concat(response.data.districts)
       districtsCopy.selected = districtOptions.concat(response.data.districts)
       setDistricts(districtsCopy)
@@ -232,6 +240,12 @@ const AddressDialog = (props) => {
 
           <TextField
             autoFocus
+            inputProps={{
+              autoComplete: 'new-password',
+              form: {
+                autoComplete: 'off',
+              },
+            }}
             margin="dense"
             label={capitalizeFirstLetter(type) + '\'s Street'}
             type="text"
@@ -243,113 +257,150 @@ const AddressDialog = (props) => {
             helperText={errors.hasOwnProperty('street') ? errors['street'][0] : '' }
           />
 
-          <Autocomplete
-            {...defaultProvincesProps[type]}
-            getOptionSelected={(option, value) => option.name === value.name }
-            clearOnEscape
-            name={'province'}
-            value={info.province}
-            onChange={(event, newValue) => {
-              if (newValue !== null) {
-                handleProvinceChange(newValue)
-              }
-
-              let value = ''
-              if (newValue === null) {
-                value = ''
-              } else if ('name' in newValue) {
-                value = newValue.name
-              }
-            
-              setInfo({
-                ...info,
-                city_name: '',
-                city: {id:0, name: ''},
-                province_name: value,
-                district_name: '',
-                district: {id:0, name: ''},
-                province: newValue
-              })
-            }}
-            renderInput={(params) => <TextField 
-                  {...params} 
-                  value={info.province} 
-                  label="Province" 
-                  margin="normal" 
-                  error={errors.hasOwnProperty('province_name') === true}
-                  helperText={errors.hasOwnProperty('province_name') ? errors['province_name'][0] : '' }  
-                />}
-          />
+        <FormControl
+          fullWidth
+        >
+        <InputLabel htmlFor="provinces">Province</InputLabel>
+          <NativeSelect
+              defaultValue={info.province_index !== 0 ? info.province_index : 0}
+              label={'provinces'}
+              fullWidth
+              inputProps={{
+                name: 'provinces',
+                id: 'provinces',
+              }}
+              onChange={(event) => {
+                let eventIndex = event.currentTarget.value  
+                let newValue = defaultProvincesProps[type]['provinces'][eventIndex]
+                if (newValue !== null) {
+                  handleProvinceChange(newValue)
+                }
   
-          <Autocomplete
-            options={cities.selected}
-            getOptionLabel={(option) => option.name}
-            getOptionSelected={(option, value) => option.name === value.name }
-            clearOnEscape
-            name={'city'}
-            value={info.city}
-            onChange={(event, newValue) => {
-              if (newValue !== null) {
-                handleCityChange(newValue)
-              }
-              
-              let value = ''
-
-              if (newValue === null) {
-                value = ''
-              } else if ('name' in newValue) {
-                value = newValue.name
-              }
-
-              setInfo({
-                ...info,
-                district_name: '',
-                district: {id:0, name: ''},
-                city_name: value,
-                city: newValue
-              })
-            }}
-            renderInput={(params) => <TextField 
-                  {...params}
-                  label="City" 
-                  margin="normal" 
-                  error={errors.hasOwnProperty('city_name') === true}
-                  helperText={errors.hasOwnProperty('city_name') ? errors['city_name'][0] : '' }
-                />}
-          />
-
-          <Autocomplete
-             options={districts.selected}
-             getOptionLabel={(option) => option.name}
-             getOptionSelected={(option, value) => option.name === value.name}
-             clearOnEscape
-             name={'district'}
-             value={info.district}
-             onChange={(event, newValue) => {
                 let value = ''
                 if (newValue === null) {
                   value = ''
                 } else if ('name' in newValue) {
                   value = newValue.name
                 }
+              
+                setInfo({
+                  ...info,
+                  city_name: '',
+                  city: {},
+                  province_index: eventIndex,
+                  province_name: value,
+                  district_name: '',
+                  district: {},
+                  province: newValue
+                })
+                
+              }}
+            >
+              {
+                defaultProvincesProps[type]['provinces'].map((event, index) => {
+                  return (
+                    <option key={index} value={index}>{event.name}</option>
+                  )
+                })
+              }
+            </NativeSelect>
+            </FormControl>
 
-               setInfo({
-                 ...info,
-                 district_name: value,
-                 district: newValue
-               })
-             }}
-            renderInput={(params) => <TextField 
-                  {...params} 
-                  label="Barangay"
-                  margin="normal" 
-                  error={errors.hasOwnProperty('district_name') === true}
-                  helperText={errors.hasOwnProperty('district_name') ? errors['district_name'][0] : '' }
-                />}
-           />
+        <FormControl
+          fullWidth
+        >
+        <InputLabel htmlFor="cities">City</InputLabel>
+          <NativeSelect
+              defaultValue={info.city_index !== 0 ? info.city_index : 0}
+              inputProps={{
+                name: 'cities',
+                id: 'cities',
+              }}
+              onChange={(event) => {
+                let eventIndex = event.currentTarget.value 
+
+                let newValue = cities.selected[eventIndex]
+                if (newValue !== null) {
+                  handleCityChange(newValue)
+                }
+                
+                let value = ''
+  
+                if (newValue === null) {
+                  value = ''
+                } else if ('name' in newValue) {
+                  value = newValue.name
+                }
+  
+                setInfo({
+                  ...info,
+                  district_name: '',
+                  // district: {},
+                  district_index: 0,
+                  city_name: value,
+                  city_index: eventIndex,
+                  city: newValue
+                })
+              }}
+            >
+              {
+                cities.selected.map((event, index) => {
+                  return (
+                    <option key={index} value={index}>{event.name}</option>
+                  )
+                })
+              }
+            </NativeSelect>
+          </FormControl>
+
+        <FormControl
+          fullWidth
+        >
+        <InputLabel htmlFor="districts">Barangay</InputLabel>
+          <NativeSelect
+              defaultValue={info.district_index !== 0 ? info.district_index : 0}
+              inputProps={{
+                name: 'districts',
+                id: 'districts',
+              }}
+              onChange={(event) => {
+                let eventIndex = event.currentTarget.value 
+                let newValue = districts.selected[eventIndex]
+                
+                let value = ''
+  
+                if (newValue === null) {
+                  value = ''
+                } else if ('name' in newValue) {
+                  value = newValue.name
+                }
+
+                setInfo({
+                  ...info,
+                  district_name: value,
+                  district: newValue,
+                  district_index: eventIndex
+                })
+              }}
+            >
+              {
+                districts.selected.map((event, index) => {
+                  return (
+                    <option key={index} value={index}>{event.name}</option>
+                  )
+                })
+              }
+            </NativeSelect>
+          </FormControl>
 
           <TextField
             margin="dense"
+            inputProps={{
+              autoComplete: 'new-password',
+              form: {
+                autoComplete: 'off',
+              },
+            }}
             name={"landmarks"}
             value={info.landmarks}
             onChange={handleInfoChange}
@@ -360,6 +411,12 @@ const AddressDialog = (props) => {
 
           <TextField
             margin="dense"
+            inputProps={{
+              autoComplete: 'new-password',
+              form: {
+                autoComplete: 'off',
+              },
+            }}
             label={capitalizeFirstLetter(type) + '\'s Full Name'}
             type="text"
             name={'full_name'}
@@ -372,6 +429,12 @@ const AddressDialog = (props) => {
 
           <TextField
             margin="dense"
+            inputProps={{
+              autoComplete: 'new-password',
+              form: {
+                autoComplete: 'off',
+              },
+            }}
             label={capitalizeFirstLetter(type) + '\'s Mobile Number'}
             type="text"
             name={'cellphone_no'}

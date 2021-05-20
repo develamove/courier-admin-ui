@@ -7,10 +7,6 @@ export const greatManilaCityIDs = [
 export const citiesWithPickUp = {
 	17: [
 				{
-					"id": 280,
-					"name": "",
-				},
-				{
 					"created_timestamp": "2021-04-21 05:01:05",
 					"id": 280,
 					"is_pickup_available": "T",
@@ -61,10 +57,6 @@ export const citiesWithPickUp = {
 				}
 		],
 	24: [
-				{
-					"id": 416,
-					"name": "",
-				},
 				{
 					"created_timestamp": "2021-04-21 05:01:05",
 					"id": 416,
@@ -117,10 +109,6 @@ export const citiesWithPickUp = {
 		],
 	65: [
 				{
-					"id": 1330,
-					"name": "",
-				},
-				{
 				"created_timestamp": "2021-04-21 05:01:05",
 				"id": 1330,
 				"is_pickup_available": "T",
@@ -150,10 +138,6 @@ export const citiesWithPickUp = {
 				},
 		],
 	42: [
-			{
-				"id": 773,
-				"name": "",
-			},
 			{
 				"created_timestamp": "2021-04-21 05:01:05",
 				"id": 773,

@@ -115,21 +115,21 @@ const HomePage = () => {
   const [cachedSenderLocations, setCachedSenderLocations] = useState({
     cities: {
       cached: {},
-      selected: [{id: 0, name: ''}],
+      selected: [],
     },
     districts: {
       cached: {},
-      selected: [{id: 0, name: ''}],
+      selected: [],
     }
   })
   const [cachedRecipientLocations, setCachedRecipientLocations] = useState({
     cities: {
       cached: {},
-      selected: [{id: 0, name: ''}],
+      selected: [],
     },
     districts: {
       cached: {},
-      selected: [{id: 0, name: ''}],
+      selected: [],
     }
   })
   const classes = useStyles();
