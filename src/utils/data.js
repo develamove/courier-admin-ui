@@ -735,7 +735,7 @@ export const provincesWithoutPickUpLocation = [
 export const SHIPPING_FEES = {
   'S': {
       'metro_manila': {
-          'fee': 100
+          'fee': 80
       },
       'greater_manila': {
           'fee': 150
@@ -752,7 +752,7 @@ export const SHIPPING_FEES = {
   },
   'M': {
       'metro_manila': {
-          'fee': 150
+          'fee': 120
       },
       'greater_manila': {
           'fee': 180
