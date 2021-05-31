@@ -710,7 +710,7 @@ export const provincesWithoutPickUpLocation = [
 		"name": "Zambales"
 	},
 	{
-		"area": "mindanao",
+		"area": "luzon",
 		"created_timestamp": "2021-04-21T04:59:45",
 		"id": 80,
 		"is_pickup_available": "F",
