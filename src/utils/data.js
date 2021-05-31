@@ -703,14 +703,14 @@ export const provincesWithoutPickUpLocation = [
 		"name": "Tawi-Tawi"
 	},
 	{
-		"area": "mindanao",
+		"area": "luzon",
 		"created_timestamp": "2021-04-21T04:59:45",
 		"id": 79,
 		"is_pickup_available": "F",
 		"name": "Zambales"
 	},
 	{
-		"area": "luzon",
+		"area": "mindanao",
 		"created_timestamp": "2021-04-21T04:59:45",
 		"id": 80,
 		"is_pickup_available": "F",
