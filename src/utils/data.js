@@ -741,13 +741,13 @@ export const SHIPPING_FEES = {
           'fee': 150
       },
       'luzon': {
-          'fee': 190
+          'fee': 170
       },
       'visayas': {
-          'fee': 210
+          'fee': 170
       },
       'mindanao': {
-          'fee': 230
+          'fee': 170
       }
   },
   'M': {
@@ -758,30 +758,30 @@ export const SHIPPING_FEES = {
           'fee': 180
       },
       'luzon': {
-          'fee': 220
+          'fee': 200
       },
       'visayas': {
-          'fee': 240
+          'fee': 200
       },
       'mindanao': {
-          'fee': 260
+          'fee': 200
       }
   },
   'L': {
       'metro_manila': {
-          'fee': 180
+          'fee': 150
       },
       'greater_manila': {
           'fee': 210
       },
       'luzon': {
-          'fee': 280
+          'fee': 250
       },
       'visayas': {
-          'fee': 300
+          'fee': 250
       },
       'mindanao': {
-          'fee': 320
+          'fee': 250
       }
   },
   'B': {
